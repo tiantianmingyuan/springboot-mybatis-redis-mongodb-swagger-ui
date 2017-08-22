@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zkzn.payment.server.dao.DemoDao">
+   
+   <insert id="save" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO demo (
+         name,
+         content)
+      VALUES (
+         #{name},
+         #{content})
+   </insert>
+   
+   <select id="findOne" resultType="com.zkzn.payment.server.entity.Demo">
+      SELECT name,content
+        FROM demo
+       WHERE id = #{id}
+   </select>
+   
+   <update id="update" parameterType="com.zkzn.payment.server.entity.Demo">
+      UPDATE demo
+         SET name = #{name}
+             , content = #{content}
+         <if test="name != null">
+            , name = #{name}
+         </if>
+         <if test="content != null">
+            , content = #{content}
+         </if>
+        WHERE id = #{id}
+   </update>
+   
+   <delete id="deleteById"  parameterType="com.zkzn.payment.server.entity.Demo">
+	  DELETE FROM demo
+	        WHERE id = #{demo.id}      
+   </delete>
+   
+   
+   <select id="findAll" resultType="com.zkzn.payment.server.entity.Demo">
+      SELECT *
+        FROM demo
+   </select>
+   
+   
+</mapper>
